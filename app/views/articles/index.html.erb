@@ -1,0 +1,48 @@
+<div class="container">
+<div class="btn-group">
+  <button type="button" class="btn btn-danger">Action</button>
+  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div>
+  <h1>Articles listing page</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title:</th>
+        <th>Description:</th>
+        <th colspan="3">Action:</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <% if article.title %>
+          <td><%=article.title%></td>
+        <% else %>
+          <td>E M P T Y</td>
+        <% end %>
+        <% if article.description %>
+          <td><%=article.description%></td>
+        <% else %>
+          <td>E M P T Y</td>
+        <% end %>
+        <td><%= link_to 'Delete', article_path(article), data:{turbo_method: :delete, turbo_confirm: "Are you sure"} %></td>
+        <td><%= link_to 'Edit', edit_article_path(article.id) %></td>
+        <td><%= link_to :Show, article_path(article.id)%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br/>
+  <%= button_to "New", new_article_path, method: :get %>
+</div>
